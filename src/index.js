@@ -4,7 +4,8 @@ const schedule = require("../data/schedule.json");
 const WEBHOOK_URL = process.env.WEBHOOK_URL;
 
 if (!WEBHOOK_URL) {
-    throw new Error("WEBHOOK_URL secret not found.");
+    console.error("Missing WEBHOOK_URL secret.");
+    process.exit(1);
 }
 
 const EMBED_COLOR = 0x1F3A5F;
@@ -18,75 +19,125 @@ const month = utc5.getUTCMonth() + 1;
 const day = utc5.getUTCDate();
 const year = utc5.getUTCFullYear();
 
-function monthMatches(startMonth, repeatEveryMonths) {
-    let diff = month - startMonth;
+function shouldRun(entry) {
 
-    while (diff < 0) diff += 12;
+    let diff = month - entry.startMonth;
 
-    return diff % repeatEveryMonths === 0;
+    while (diff < 0) {
+        diff += 12;
+    }
+
+    if (diff % entry.repeatEveryMonths !== 0)
+        return false;
+
+    return day === entry.startDay;
 }
 
-async function sendEmbed(item) {
+function monthName(monthNumber) {
 
-    const monthName = utc5.toLocaleString("en-US", {
+    return new Date(
+        Date.UTC(year, monthNumber - 1, 1)
+    ).toLocaleString("en-US", {
         month: "long",
         timeZone: "UTC"
     });
 
-    const dateText =
-        item.startDay === item.endDay
-            ? `${monthName} ${item.startDay}, ${year}`
-            : `${monthName} ${item.startDay}-${item.endDay}, ${year}`;
+}
 
-    const embed = {
-        title: "🚨 Notices ─ PM DUE",
-        color: EMBED_COLOR,
-        description:
-            "────────────────────────",
-        fields: [
+function buildEmbed(entry) {
+
+    const date =
+        entry.startDay === entry.endDay
+            ? `${monthName(month)} ${entry.startDay}, ${year}`
+            : `${monthName(month)} ${entry.startDay}-${entry.endDay}, ${year}`;
+
+    return {
+
+        username: "EMS Logistics",
+
+        embeds: [
             {
-                name: "📅 Units Due",
-                value:
-                    `**Date**\n${dateText}\n\n${item.units}`,
-                inline: false
-            },
-            {
-                name: "🔧 Maintenance Type",
-                value:
-                    "General Maintenance",
-                inline: false
-            },
-            {
-                name: "Reminder",
-                value:
-                    "Please complete all PMs within the scheduled dates.\n\nRemember to log PM completion using `?pmc`.",
-                inline: false
+                color: EMBED_COLOR,
+
+                title: "🚨 Notices ─ PM DUE",
+
+                description:
+`────────────────────────
+
+📅 **The following units are due for maintenance**
+
+• Date:
+${date}
+
+${entry.units}
+
+────────────────────────
+
+🔧 **Maintenance Type**
+
+• General Maintenance
+
+────────────────────────
+
+Please complete all PMs within the scheduled dates.
+
+Remember to log PM completion using
+
+\`?pmc\``,
+
+                footer: {
+                    text: "EMS Logistics Division"
+                },
+
+                timestamp: new Date().toISOString()
             }
-        ],
-        footer: {
-            text: "EMS Logistics Division"
-        },
-        timestamp: new Date().toISOString()
+        ]
     };
 
-    await axios.post(WEBHOOK_URL, {
-        embeds: [embed]
-    });
+}
 
-    console.log(`Sent reminder for ${item.units}`);
+async function send(entry) {
+
+    try {
+
+        await axios.post(
+            WEBHOOK_URL,
+            buildEmbed(entry)
+        );
+
+        console.log(
+            `Sent reminder for ${entry.units}`
+        );
+
+    }
+
+    catch(err){
+
+        console.error(err.response?.data || err);
+
+    }
+
 }
 
 (async () => {
 
-    for (const item of schedule) {
+    let sent = false;
 
-        if (!monthMatches(item.startMonth, item.repeatEveryMonths))
+    for(const entry of schedule){
+
+        if(!shouldRun(entry))
             continue;
 
-        if (day !== item.startDay)
-            continue;
+        await send(entry);
 
-        await sendEmbed(item);
+        sent = true;
+
+    }
+
+    if(!sent){
+
+        console.log("Nothing scheduled today.");
+
     }
 
 })();
