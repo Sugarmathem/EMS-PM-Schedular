@@ -1,12 +1,12 @@
 {
   "name": "ems-pm-scheduler",
   "version": "1.0.0",
-  "description": "Automatic EMS PM reminder scheduler",
+  "description": "EMS Preventative Maintenance Scheduler",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
   "dependencies": {
-    "axios": "^1.8.4"
+    "axios": "^1.7.9"
   }
 }
