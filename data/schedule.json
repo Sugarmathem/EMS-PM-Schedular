@@ -1,1 +1,135 @@
-{}
+[
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 1,
+    "endDay": 1,
+    "units": "DOS-01 ➜ DOS-03"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 2,
+    "endDay": 2,
+    "units": "Medical Bus, MED-01 ➜ MED-03"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 3,
+    "endDay": 3,
+    "units": "MED-04 ➜ MED-05"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 4,
+    "endDay": 4,
+    "units": "EMS-01 ➜ EMS-02"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 5,
+    "endDay": 6,
+    "units": "EMS-03 ➜ EMS-06"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 7,
+    "endDay": 8,
+    "units": "EMS-07 ➜ EMS-10"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 9,
+    "endDay": 10,
+    "units": "EMS-11 ➜ EMS-15"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 11,
+    "endDay": 12,
+    "units": "EMS-16 ➜ EMS-19"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 13,
+    "endDay": 15,
+    "units": "EMS-20 ➜ EMS-29"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 16,
+    "endDay": 18,
+    "units": "EMS-30 ➜ EMS-39"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 19,
+    "endDay": 21,
+    "units": "EMS-40 ➜ EMS-49"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 22,
+    "endDay": 24,
+    "units": "EMS-50 ➜ EMS-59"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 25,
+    "endDay": 27,
+    "units": "EMS-60 ➜ EMS-68"
+  },
+  {
+    "startMonth": 8,
+    "repeatEveryMonths": 2,
+    "startDay": 28,
+    "endDay": 30,
+    "units": "EMS-70 ➜ EMS-79"
+  },
+  {
+    "startMonth": 9,
+    "repeatEveryMonths": 2,
+    "startDay": 1,
+    "endDay": 3,
+    "units": "EMS-80 ➜ EMS-89"
+  },
+  {
+    "startMonth": 9,
+    "repeatEveryMonths": 2,
+    "startDay": 4,
+    "endDay": 6,
+    "units": "EMS-90 ➜ EMS-99"
+  },
+  {
+    "startMonth": 9,
+    "repeatEveryMonths": 2,
+    "startDay": 7,
+    "endDay": 9,
+    "units": "EMS-100 ➜ EMS-109"
+  },
+  {
+    "startMonth": 9,
+    "repeatEveryMonths": 2,
+    "startDay": 10,
+    "endDay": 12,
+    "units": "EMS-110 ➜ EMS-119"
+  },
+  {
+    "startMonth": 9,
+    "repeatEveryMonths": 2,
+    "startDay": 11,
+    "endDay": 13,
+    "units": "EMS-120 ➜ EMS-127"
+  }
+]
